@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: for-reusable-testcontainer
+  datasource:
+    url: jdbc:mysql://localhost:33006/main
+    username: montre
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver

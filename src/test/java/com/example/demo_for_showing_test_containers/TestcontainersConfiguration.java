@@ -1,4 +1,4 @@
-package com.example.for_reusable_testcontainer;
+package com.example.demo_for_showing_test_containers;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

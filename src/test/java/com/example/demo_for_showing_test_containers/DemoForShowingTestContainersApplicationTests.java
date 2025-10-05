@@ -1,4 +1,4 @@
-package com.example.for_reusable_testcontainer;
+package com.example.demo_for_showing_test_containers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest
-class ForReusableTestcontainerApplicationTests {
+class DemoForShowingTestContainersApplicationTests {
 
 	@Test
 	void contextLoads() {
