@@ -1,8 +1,8 @@
 spring:
   application:
-    name: for-reusable-testcontainer
+    name: demo-for-showing-test-containers
   datasource:
     url: jdbc:mysql://localhost:33006/main
-    username: montre
+    username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
