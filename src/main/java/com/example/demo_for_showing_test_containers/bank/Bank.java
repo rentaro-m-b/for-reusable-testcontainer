@@ -1,3 +1,3 @@
 package com.example.demo_for_showing_test_containers.bank;
 
-record GetBanksResponseBankJson(int value) {}
+public record Bank(int value) {}
