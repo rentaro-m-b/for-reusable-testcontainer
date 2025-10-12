@@ -6,18 +6,18 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-interface BankMapper {
+public interface BankMapper {
     @Select(
             """
                 SELECT
                     banks.id,
                     banks.value,
                     banks.unit,
-                    banks.createdAt
+                    banks.created_at
                 FROM
                     banks
                 ORDER BY
-                    createdAt
+                    created_at
             """
     )
     List<BankRow> listBanks();

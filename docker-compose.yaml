@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql
+    image: mysql:9.4.0
     ports:
       - "33006:3306"
     restart: always

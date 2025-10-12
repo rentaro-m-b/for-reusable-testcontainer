@@ -1,3 +1,5 @@
 package com.example.demo_for_showing_test_containers.bank;
 
-public record Bank(int value) {}
+import java.time.LocalDateTime;
+
+public record Bank(String id, int value, String unit, LocalDateTime createdAt) {}
