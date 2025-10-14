@@ -22,7 +22,7 @@ public class BankController {
     }
 
     @ExceptionHandler(Exception.class)
-    public ProblemDetail handleException(Exception ex) {
+    public ProblemDetail handleException() {
         ProblemDetail detail = ProblemDetail.forStatus(INTERNAL_SERVER_ERROR);
         detail.setDetail("サーバー内部で予期しないエラーが発生しました。");
         return detail;
