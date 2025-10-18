@@ -115,7 +115,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>11.14.1</version>
+				<configuration>
+					<url>jdbc:mysql://localhost:33006/main</url>
+					<user>root</user>
+					<password>password</password>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

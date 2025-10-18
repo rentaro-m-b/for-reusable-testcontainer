@@ -15,8 +15,8 @@ import static org.springframework.http.HttpStatus.OK;
 
 @DBRider
 @DBUnit(
-        schema = "main",                 // ← あなたのDB名
-        caseSensitiveTableNames = true   // ← これが肝
+        schema = "main",
+        caseSensitiveTableNames = true
 )
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GetBanksAPITest {
