@@ -8,9 +8,21 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.images.builder.ImageFromDockerfile;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.utility.DockerImageName;
+
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.time.Duration;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
 @DBRider
@@ -18,8 +30,23 @@ import static org.springframework.http.HttpStatus.OK;
         schema = "main",
         caseSensitiveTableNames = true
 )
+@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GetBanksAPITest {
+    @Container
+    public static GenericContainer<?> app =
+            new GenericContainer<>(
+                    new ImageFromDockerfile()
+                            .withDockerfile(new File("Dockerfile").toPath())
+                            .withFileFromPath(".", Paths.get("."))
+            )
+                    .withExposedPorts(8080)
+                    .waitingFor(
+                            Wait.forHttp("/health")
+                                    .forStatusCode(NO_CONTENT.value())
+                                    .withStartupTimeout(Duration.ofSeconds(120))
+                    );
+
     @BeforeAll
     static void setUp() {
         RestAssured.baseURI = "http://localhost";
