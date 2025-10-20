@@ -1,7 +1,6 @@
 spring:
   application:
     name: demo-for-showing-test-containers
-    port:
   datasource:
     url: jdbc:mysql://localhost:33006/main
     username: root

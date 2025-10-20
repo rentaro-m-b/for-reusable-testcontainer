@@ -15,12 +15,7 @@ public class BankRepository {
 
     List<Bank> listBanks() throws Exception {
         try {
-            System.out.println("検証----------------------------------------");
-            var bankRows = bankMapper.listBanks();
-            System.out.println(bankRows);
-            var banks = BankRow.of(bankMapper.listBanks());
-            System.out.println(banks);
-            return banks;
+            return BankRow.of(bankMapper.listBanks());
         } catch (DataAccessException e) {
             throw new Exception(e);
         }
