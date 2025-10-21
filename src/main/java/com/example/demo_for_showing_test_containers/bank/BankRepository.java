@@ -15,7 +15,15 @@ public class BankRepository {
 
     List<Bank> listBanks() throws Exception {
         try {
-            return BankRow.of(bankMapper.listBanks());
+            return BankRow.toEntity(bankMapper.listBanks());
+        } catch (DataAccessException e) {
+            throw new Exception(e);
+        }
+    }
+
+    void createBank(Bank bank) throws Exception {
+        try {
+            bankMapper.createBank(BankRow.of(bank));
         } catch (DataAccessException e) {
             throw new Exception(e);
         }

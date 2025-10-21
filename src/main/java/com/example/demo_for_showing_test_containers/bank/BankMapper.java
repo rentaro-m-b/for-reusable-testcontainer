@@ -1,5 +1,6 @@
 package com.example.demo_for_showing_test_containers.bank;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,4 +22,19 @@ public interface BankMapper {
             """
     )
     List<BankRow> listBanks();
+
+    @Insert("""
+        INSERT INTO banks (
+            id,
+            value,
+            unit,
+            created_at
+        ) VALUES (
+            #{id},
+            #{value},
+            #{unit},
+            #{createdAt}
+        )
+    """)
+    void createBank(BankRow bank);
 }

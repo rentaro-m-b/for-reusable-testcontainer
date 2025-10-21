@@ -2,6 +2,7 @@ package com.example.demo_for_showing_test_containers.bank;
 
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.core.api.dataset.SeedStrategy;
 import com.github.database.rider.junit5.api.DBRider;
 import org.flywaydb.core.Flyway;
@@ -83,5 +84,28 @@ class GetBanksRepositoryTest {
                 )
         );
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DataSet(
+            value = "datasets/banks.yaml",
+            strategy = SeedStrategy.CLEAN_INSERT,
+            cleanBefore = true
+    )
+    @ExpectedDataSet(
+            value = "expected/createBank.yaml"
+    )
+    void createBank() throws Exception {
+        // setup
+
+        // execute
+        target.createBank(new Bank(
+                "00000000-0000-0000-0000-000000000003",
+                200,
+                "JPY",
+                LocalDateTime.parse("2025-01-01T00:00:00")
+        ));
+
+        // assert
     }
 }

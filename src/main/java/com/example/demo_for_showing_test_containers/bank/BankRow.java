@@ -5,16 +5,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record BankRow(String id, int value, String unit, LocalDateTime createdAt) {
-    static List<Bank> of(List<BankRow> bankRows) {
-        return bankRows.stream().map(BankRow::of).collect(Collectors.toList());
+    static List<Bank> toEntity(List<BankRow> bankRows) {
+        return bankRows.stream().map(BankRow::toEntity).collect(Collectors.toList());
     }
 
-    Bank of() {
+    Bank toEntity() {
         return new Bank(
                 id,
                 value,
                 unit,
                 createdAt
+        );
+    }
+
+    static BankRow of(Bank bank) {
+        return new BankRow(
+                bank.id(),
+                bank.value(),
+                bank.unit(),
+                bank.createdAt()
         );
     }
 }
