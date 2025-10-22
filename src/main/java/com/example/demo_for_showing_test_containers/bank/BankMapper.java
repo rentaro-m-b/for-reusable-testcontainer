@@ -1,8 +1,6 @@
 package com.example.demo_for_showing_test_containers.bank;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -37,4 +35,20 @@ public interface BankMapper {
         )
     """)
     void createBank(BankRow bank);
+
+    @Update("""
+        UPDATE banks
+        SET
+            value = #{value},
+            unit = #{unit},
+            created_at = #{createdAt}
+        WHERE id = #{id}
+    """)
+    void updateBank(BankRow bank);
+
+    @Delete("""
+    DELETE FROM banks
+    WHERE id = #{id}
+""")
+    void deleteBank(String id);
 }

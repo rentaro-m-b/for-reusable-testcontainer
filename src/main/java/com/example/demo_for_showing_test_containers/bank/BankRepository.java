@@ -28,4 +28,20 @@ public class BankRepository {
             throw new Exception(e);
         }
     }
+
+    void updateBank(Bank bank) throws Exception {
+        try {
+            bankMapper.updateBank(BankRow.of(bank));
+        } catch (DataAccessException e) {
+            throw new Exception(e);
+        }
+    }
+
+    void deleteBank(String id) throws Exception {
+        try {
+            bankMapper.deleteBank(id);
+        } catch (DataAccessException e) {
+            throw new Exception(e);
+        }
+    }
 }

@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DBRider
 @DBUnit(caseSensitiveTableNames = true)
-class GetBanksRepositoryTest {
+class BankRepositoryTest {
     @ServiceConnection
     @Container
     static MySQLContainer<?> container =
@@ -105,6 +105,49 @@ class GetBanksRepositoryTest {
                 "JPY",
                 LocalDateTime.parse("2025-01-01T00:00:00")
         ));
+
+        // assert
+    }
+
+    @Test
+    @DataSet(
+            value = "datasets/banks.yaml",
+            strategy = SeedStrategy.CLEAN_INSERT,
+            cleanBefore = true
+    )
+    @ExpectedDataSet(
+            value = "expected/updateBank.yaml"
+    )
+    void updateBank() throws Exception {
+        // setup
+
+        // execute
+        target.updateBank(
+                new Bank(
+                        "00000000-0000-0000-0000-000000000001",
+                        300,
+                        "USD",
+                        LocalDateTime.parse("2025-01-01T00:00:01")
+                )
+        );
+
+        // assert
+    }
+
+    @Test
+    @DataSet(
+            value = "datasets/banks.yaml",
+            strategy = SeedStrategy.CLEAN_INSERT,
+            cleanBefore = true
+    )
+    @ExpectedDataSet(
+            value = "expected/deleteBank.yaml"
+    )
+    void deleteBank() throws Exception {
+        // setup
+
+        // execute
+        target.deleteBank("00000000-0000-0000-0000-000000000001");
 
         // assert
     }
