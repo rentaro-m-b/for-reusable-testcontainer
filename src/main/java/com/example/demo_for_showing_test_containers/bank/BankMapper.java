@@ -6,30 +6,28 @@ import java.util.List;
 
 @Mapper
 public interface BankMapper {
-    @Select(
-            """
-                SELECT
-                    banks.id,
-                    banks.value,
-                    banks.unit,
-                    banks.created_at
-                FROM
-                    banks
-                ORDER BY
-                    created_at
-            """
-    )
+    @Select("""
+        SELECT
+            banks.id,
+            banks.deposit,
+            banks.unit,
+            banks.created_at
+        FROM
+            banks
+        ORDER BY
+            created_at
+    """)
     List<BankRow> listBanks();
 
     @Insert("""
         INSERT INTO banks (
             id,
-            value,
+            deposit,
             unit,
             created_at
         ) VALUES (
             #{id},
-            #{value},
+            #{deposit},
             #{unit},
             #{createdAt}
         )
@@ -39,7 +37,7 @@ public interface BankMapper {
     @Update("""
         UPDATE banks
         SET
-            value = #{value},
+            deposit = #{deposit},
             unit = #{unit},
             created_at = #{createdAt}
         WHERE id = #{id}

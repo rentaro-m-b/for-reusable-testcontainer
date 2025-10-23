@@ -9,7 +9,7 @@ record GetBanksResponseBankJson(int value) {
     }
     static GetBanksResponseBankJson of(Bank bank) {
         return new GetBanksResponseBankJson(
-                bank.value()
+                bank.deposit()
         );
     }
 }

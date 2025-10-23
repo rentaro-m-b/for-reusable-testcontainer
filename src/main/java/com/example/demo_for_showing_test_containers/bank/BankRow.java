@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record BankRow(String id, int value, String unit, LocalDateTime createdAt) {
+public record BankRow(String id, int deposit, String unit, LocalDateTime createdAt) {
     static List<Bank> toEntity(List<BankRow> bankRows) {
         return bankRows.stream().map(BankRow::toEntity).collect(Collectors.toList());
     }
@@ -12,7 +12,7 @@ public record BankRow(String id, int value, String unit, LocalDateTime createdAt
     Bank toEntity() {
         return new Bank(
                 id,
-                value,
+                deposit,
                 unit,
                 createdAt
         );
@@ -21,7 +21,7 @@ public record BankRow(String id, int value, String unit, LocalDateTime createdAt
     static BankRow of(Bank bank) {
         return new BankRow(
                 bank.id(),
-                bank.value(),
+                bank.deposit(),
                 bank.unit(),
                 bank.createdAt()
         );
