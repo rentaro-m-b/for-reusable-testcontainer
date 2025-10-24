@@ -1,5 +1,9 @@
 package com.example.demo_for_showing_test_containers.bank;
 
+import com.example.demo_for_showing_test_containers.bank.dao.BankRepository;
+import com.example.demo_for_showing_test_containers.bank.domain.Bank;
+import com.example.demo_for_showing_test_containers.bank.domain.Currency;
+import com.example.demo_for_showing_test_containers.bank.domain.Money;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
@@ -72,14 +76,12 @@ class BankRepositoryTest {
         List<Bank> expected = List.of(
                 new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        100,
-                        "JPY",
+                        new Money(100, Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 ),
                 new Bank(
                         "00000000-0000-0000-0000-000000000002",
-                        120,
-                        "JPY",
+                        new Money(120, Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 )
         );
@@ -101,8 +103,7 @@ class BankRepositoryTest {
         // execute
         target.createBank(new Bank(
                 "00000000-0000-0000-0000-000000000003",
-                200,
-                "JPY",
+                new Money(200, Currency.YEN),
                 LocalDateTime.parse("2025-01-01T00:00:00")
         ));
 
@@ -125,8 +126,7 @@ class BankRepositoryTest {
         target.updateBank(
                 new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        300,
-                        "USD",
+                        new Money(300, Currency.DOLLAR),
                         LocalDateTime.parse("2025-01-01T00:00:01")
                 )
         );

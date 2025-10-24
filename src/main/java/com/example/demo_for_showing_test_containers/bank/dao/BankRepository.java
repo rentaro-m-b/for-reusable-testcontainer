@@ -1,5 +1,6 @@
-package com.example.demo_for_showing_test_containers.bank;
+package com.example.demo_for_showing_test_containers.bank.dao;
 
+import com.example.demo_for_showing_test_containers.bank.domain.Bank;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ public class BankRepository {
         this.bankMapper = bankMapper;
     }
 
-    List<Bank> listBanks() throws Exception {
+    public List<Bank> listBanks() throws Exception {
         try {
             return BankRow.toEntity(bankMapper.listBanks());
         } catch (DataAccessException e) {
@@ -21,7 +22,7 @@ public class BankRepository {
         }
     }
 
-    void createBank(Bank bank) throws Exception {
+    public void createBank(Bank bank) throws Exception {
         try {
             bankMapper.createBank(BankRow.of(bank));
         } catch (DataAccessException e) {
@@ -29,7 +30,7 @@ public class BankRepository {
         }
     }
 
-    void updateBank(Bank bank) throws Exception {
+    public void updateBank(Bank bank) throws Exception {
         try {
             bankMapper.updateBank(BankRow.of(bank));
         } catch (DataAccessException e) {
@@ -37,7 +38,7 @@ public class BankRepository {
         }
     }
 
-    void deleteBank(String id) throws Exception {
+    public void deleteBank(String id) throws Exception {
         try {
             bankMapper.deleteBank(id);
         } catch (DataAccessException e) {

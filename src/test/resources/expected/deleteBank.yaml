@@ -1,5 +1,5 @@
 banks:
   - id: "00000000-0000-0000-0000-000000000002"
     deposit: 120
-    unit: "JPY"
+    currency: "JPY"
     created_at: "2025-01-01 00:00:00"

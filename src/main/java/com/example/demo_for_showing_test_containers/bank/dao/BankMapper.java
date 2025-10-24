@@ -1,4 +1,4 @@
-package com.example.demo_for_showing_test_containers.bank;
+package com.example.demo_for_showing_test_containers.bank.dao;
 
 import org.apache.ibatis.annotations.*;
 
@@ -10,7 +10,7 @@ public interface BankMapper {
         SELECT
             banks.id,
             banks.deposit,
-            banks.unit,
+            banks.currency,
             banks.created_at
         FROM
             banks
@@ -23,12 +23,12 @@ public interface BankMapper {
         INSERT INTO banks (
             id,
             deposit,
-            unit,
+            currency,
             created_at
         ) VALUES (
             #{id},
             #{deposit},
-            #{unit},
+            #{currency},
             #{createdAt}
         )
     """)
@@ -38,7 +38,7 @@ public interface BankMapper {
         UPDATE banks
         SET
             deposit = #{deposit},
-            unit = #{unit},
+            currency = #{currency},
             created_at = #{createdAt}
         WHERE id = #{id}
     """)

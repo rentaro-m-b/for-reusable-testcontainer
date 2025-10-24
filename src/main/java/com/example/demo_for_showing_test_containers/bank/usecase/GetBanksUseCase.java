@@ -1,5 +1,7 @@
-package com.example.demo_for_showing_test_containers.bank;
+package com.example.demo_for_showing_test_containers.bank.usecase;
 
+import com.example.demo_for_showing_test_containers.bank.dao.BankRepository;
+import com.example.demo_for_showing_test_containers.bank.domain.Bank;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,7 @@ public class GetBanksUseCase {
         this.bankRepository = bankRepository;
     }
 
-    List<Bank> handle() throws Exception {
+    public List<Bank> handle() throws Exception {
         try {
             return bankRepository.listBanks();
         } catch (Exception e) {

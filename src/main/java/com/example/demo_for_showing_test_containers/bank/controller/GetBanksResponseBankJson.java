@@ -1,4 +1,6 @@
-package com.example.demo_for_showing_test_containers.bank;
+package com.example.demo_for_showing_test_containers.bank.controller;
+
+import com.example.demo_for_showing_test_containers.bank.domain.Bank;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +11,7 @@ record GetBanksResponseBankJson(int value) {
     }
     static GetBanksResponseBankJson of(Bank bank) {
         return new GetBanksResponseBankJson(
-                bank.deposit()
+                bank.money().deposit()
         );
     }
 }
