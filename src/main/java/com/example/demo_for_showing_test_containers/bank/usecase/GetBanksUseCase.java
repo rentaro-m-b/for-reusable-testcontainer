@@ -1,7 +1,7 @@
 package com.example.demo_for_showing_test_containers.bank.usecase;
 
-import com.example.demo_for_showing_test_containers.bank.dao.BankRepository;
 import com.example.demo_for_showing_test_containers.bank.domain.Bank;
+import com.example.demo_for_showing_test_containers.bank.domain.BankRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

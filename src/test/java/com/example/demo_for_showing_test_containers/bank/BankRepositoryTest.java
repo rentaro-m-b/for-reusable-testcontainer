@@ -1,6 +1,6 @@
 package com.example.demo_for_showing_test_containers.bank;
 
-import com.example.demo_for_showing_test_containers.bank.dao.BankRepository;
+import com.example.demo_for_showing_test_containers.bank.dao.BankRepositoryImpl;
 import com.example.demo_for_showing_test_containers.bank.domain.Bank;
 import com.example.demo_for_showing_test_containers.bank.domain.Currency;
 import com.example.demo_for_showing_test_containers.bank.domain.Money;
@@ -58,7 +58,7 @@ class BankRepositoryTest {
     }
 
     @Autowired
-    BankRepository target;
+    BankRepositoryImpl target;
 
     @Test
     @DataSet(

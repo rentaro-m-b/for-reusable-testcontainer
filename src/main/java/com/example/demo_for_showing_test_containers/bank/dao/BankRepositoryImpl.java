@@ -1,16 +1,17 @@
 package com.example.demo_for_showing_test_containers.bank.dao;
 
 import com.example.demo_for_showing_test_containers.bank.domain.Bank;
+import com.example.demo_for_showing_test_containers.bank.domain.BankRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class BankRepository {
+public class BankRepositoryImpl implements BankRepository {
     private final BankMapper bankMapper;
 
-    public BankRepository(BankMapper bankMapper) {
+    public BankRepositoryImpl(BankMapper bankMapper) {
         this.bankMapper = bankMapper;
     }
 
