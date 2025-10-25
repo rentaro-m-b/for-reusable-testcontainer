@@ -1,6 +1,5 @@
-package com.example.demo_for_showing_test_containers.bank;
+package com.example.demo_for_showing_test_containers.bank.dao;
 
-import com.example.demo_for_showing_test_containers.bank.dao.BankRepositoryImpl;
 import com.example.demo_for_showing_test_containers.bank.domain.Bank;
 import com.example.demo_for_showing_test_containers.bank.domain.Currency;
 import com.example.demo_for_showing_test_containers.bank.domain.Money;
