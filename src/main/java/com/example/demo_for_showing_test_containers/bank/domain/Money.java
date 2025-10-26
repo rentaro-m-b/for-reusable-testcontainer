@@ -1,22 +1,25 @@
 package com.example.demo_for_showing_test_containers.bank.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public record Money(int deposit, Currency currency) {
-    public Money plus(Money addend) {
+    public Money add(Money addend) {
         if (currency != addend.currency) {
-            // TODO: augend base で計算をする
-            // YEN : DOLLAR = 100 : 1 としたら？
-            // DOLLAR : EURO = 1 : 1.1 としたら？
-            // YEN : EURO = 100 * 1.1 : 1
-            // 100は何？YENの割合。相手がYENだったらこれは可能だが、相手がEURだったら？
-            if (addend.currency == Currency.DOLLAR) {
-                var converted = addend.deposit * 100;
-                return new Money(deposit + converted, currency);
-            }
-            if (addend.currency == Currency.EURO) {
-                var converted = addend.deposit * 110;
-                return new Money(deposit + converted, currency);
-            }
+            var result = this.convertToDollar().deposit + addend.convertToDollar().deposit;
+            result = BigDecimal.valueOf(result).multiply(currency.rate()).setScale(0, RoundingMode.HALF_UP).intValue();
+            return new Money(result, currency);
         }
         return new Money(deposit + addend.deposit, currency);
+    }
+
+    public Money convertToDollar() {
+        if (currency.isDollar()) {
+            return this;
+        }
+        var convertedBigDecimal = BigDecimal.valueOf(deposit).divide(currency.rate(), RoundingMode.HALF_UP);
+        var converted = convertedBigDecimal.setScale(0, RoundingMode.HALF_UP).intValue();
+        System.out.println(converted);
+        return new Money(converted, Currency.DOLLAR);
     }
 }

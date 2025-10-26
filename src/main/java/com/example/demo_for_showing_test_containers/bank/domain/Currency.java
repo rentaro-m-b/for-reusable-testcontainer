@@ -1,16 +1,19 @@
 package com.example.demo_for_showing_test_containers.bank.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public enum Currency {
-    YEN("JPY"),
-    DOLLAR("USD"),
-    EURO("EUR");
+    YEN("JPY", BigDecimal.valueOf(150)),
+    DOLLAR("USD", BigDecimal.valueOf(1)),
+    EURO("EUR", BigDecimal.valueOf(1.1));
 
     private final String code;
+    private final BigDecimal rate;
 
-    Currency(String code) {
+    Currency(String code, BigDecimal rate) {
         this.code = code;
+        this.rate = rate;
     }
 
     public static Currency codeOf(String code) {
@@ -24,5 +27,13 @@ public enum Currency {
 
     public String code() {
         return code;
+    }
+
+    public BigDecimal rate() {
+        return rate;
+    }
+
+    public boolean isDollar() {
+        return Objects.equals(code, Currency.DOLLAR.code());
     }
 }
