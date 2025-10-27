@@ -20,6 +20,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -75,12 +76,12 @@ class BankRepositoryTest {
         List<Bank> expected = List.of(
                 new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        new Money(100, Currency.YEN),
+                        new Money(BigDecimal.valueOf(100), Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 ),
                 new Bank(
                         "00000000-0000-0000-0000-000000000002",
-                        new Money(120, Currency.YEN),
+                        new Money(BigDecimal.valueOf(120), Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 )
         );
@@ -102,7 +103,7 @@ class BankRepositoryTest {
         // execute
         target.createBank(new Bank(
                 "00000000-0000-0000-0000-000000000003",
-                new Money(200, Currency.YEN),
+                new Money(BigDecimal.valueOf(200), Currency.YEN),
                 LocalDateTime.parse("2025-01-01T00:00:00")
         ));
 
@@ -125,7 +126,7 @@ class BankRepositoryTest {
         target.updateBank(
                 new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        new Money(300, Currency.DOLLAR),
+                        new Money(BigDecimal.valueOf(300), Currency.DOLLAR),
                         LocalDateTime.parse("2025-01-01T00:00:01")
                 )
         );

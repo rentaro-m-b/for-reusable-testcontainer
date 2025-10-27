@@ -11,7 +11,7 @@ record GetBanksResponseBankJson(int value) {
     }
     static GetBanksResponseBankJson of(Bank bank) {
         return new GetBanksResponseBankJson(
-                bank.money().deposit()
+                bank.money().deposit().intValue()
         );
     }
 }
