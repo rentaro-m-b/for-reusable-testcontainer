@@ -76,12 +76,12 @@ class BankRepositoryTest {
         List<Bank> expected = List.of(
                 new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        new Money(BigDecimal.valueOf(100), Currency.YEN),
+                        new Money(new BigDecimal("100.00"), Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 ),
                 new Bank(
                         "00000000-0000-0000-0000-000000000002",
-                        new Money(BigDecimal.valueOf(120), Currency.YEN),
+                        new Money(new BigDecimal("120.00"), Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 )
         );

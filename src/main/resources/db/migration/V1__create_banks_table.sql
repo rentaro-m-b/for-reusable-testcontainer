@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS banks (
   id VARCHAR(36) NOT NULL PRIMARY KEY,
-  deposit INT NOT NULL,
+  deposit DECIMAL(20, 2) NOT NULL,
   currency VARCHAR(3) NOT NULL,
   created_at DATETIME NOT NULL
 );
