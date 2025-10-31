@@ -1,9 +1,6 @@
-package com.example.demo_for_showing_test_containers.bank.dao;
+package com.example.demo_for_showing_test_containers.company.dao;
 
-import com.example.demo_for_showing_test_containers.bank.domain.Bank;
-import com.example.demo_for_showing_test_containers.bank.domain.BankRepository;
-import com.example.demo_for_showing_test_containers.bank.domain.Currency;
-import com.example.demo_for_showing_test_containers.bank.domain.Money;
+import com.example.demo_for_showing_test_containers.bank.domain.*;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
@@ -21,7 +18,6 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DBRider
 @DBUnit(caseSensitiveTableNames = true)
-class BankRepositoryTest {
+class CompanyRepositoryTest {
     @ServiceConnection
     @Container
     static MySQLContainer<?> container =
@@ -59,7 +55,7 @@ class BankRepositoryTest {
     }
 
     @Autowired
-    BankRepository target;
+    CompanyRepository target;
 
     @Test
     @DataSet(
@@ -67,22 +63,22 @@ class BankRepositoryTest {
             strategy = SeedStrategy.CLEAN_INSERT,
             cleanBefore = true
     )
-    void getBanks() throws Exception {
+    void listCompanies() throws Exception {
         // setup
 
         // execute
-        List<Bank> actual = target.listBanks();
+        List<Company> actual = target.listCompanies();
 
         // assert
-        List<Bank> expected = List.of(
-                new Bank(
+        List<Company> expected = List.of(
+                new Company(
                         "00000000-0000-0000-0000-000000000001",
-                        new Money(new BigDecimal("100.00"), Currency.YEN),
+                        "Apple Inc.",
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 ),
-                new Bank(
+                new Company(
                         "00000000-0000-0000-0000-000000000002",
-                        new Money(new BigDecimal("120.00"), Currency.YEN),
+                        "Oracle",
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 )
         );
@@ -98,13 +94,13 @@ class BankRepositoryTest {
     @ExpectedDataSet(
             value = "expected/createBank.yaml"
     )
-    void createBank() throws Exception {
+    void createCompany() throws Exception {
         // setup
 
         // execute
-        target.createBank(new Bank(
+        target.createCompany(new Company(
                 "00000000-0000-0000-0000-000000000003",
-                new Money(BigDecimal.valueOf(200), Currency.YEN),
+                "forest",
                 LocalDateTime.parse("2025-01-01T00:00:00")
         ));
 
@@ -120,14 +116,14 @@ class BankRepositoryTest {
     @ExpectedDataSet(
             value = "expected/updateBank.yaml"
     )
-    void updateBank() throws Exception {
+    void updateCompany() throws Exception {
         // setup
 
         // execute
-        target.updateBank(
-                new Bank(
+        target.updateCompany(
+                new Company(
                         "00000000-0000-0000-0000-000000000001",
-                        new Money(BigDecimal.valueOf(300), Currency.DOLLAR),
+                        "Lisa Inc.",
                         LocalDateTime.parse("2025-01-01T00:00:01")
                 )
         );
@@ -144,11 +140,11 @@ class BankRepositoryTest {
     @ExpectedDataSet(
             value = "expected/deleteBank.yaml"
     )
-    void deleteBank() throws Exception {
+    void deleteCompany() throws Exception {
         // setup
 
         // execute
-        target.deleteBank("00000000-0000-0000-0000-000000000001");
+        target.deleteCompany("00000000-0000-0000-0000-000000000001");
 
         // assert
     }

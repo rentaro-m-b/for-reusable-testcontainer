@@ -5,48 +5,44 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-public interface BankMapper {
+public interface CompanyMapper {
     @Select("""
         SELECT
             id,
-            deposit,
-            currency,
+            name,
             created_at
         FROM
-            banks
+            companies
         ORDER BY
             created_at
     """)
-    List<BankRow> listBanks();
+    List<CompanyRow> listCompanies();
 
     @Insert("""
-        INSERT INTO banks (
+        INSERT INTO companies (
             id,
-            deposit,
-            currency,
+            name,
             created_at
         ) VALUES (
             #{id},
-            #{deposit},
-            #{currency},
+            #{name},
             #{createdAt}
         )
     """)
-    void createBank(BankRow bank);
+    void createCompany(CompanyRow company);
 
     @Update("""
-        UPDATE banks
+        UPDATE companies
         SET
-            deposit = #{deposit},
-            currency = #{currency},
+            name = #{name},
             created_at = #{createdAt}
         WHERE id = #{id}
     """)
-    void updateBank(BankRow bank);
+    void updateCompany(CompanyRow company);
 
     @Delete("""
-    DELETE FROM banks
+    DELETE FROM companies
     WHERE id = #{id}
 """)
-    void deleteBank(String id);
+    void deleteCompany(String id);
 }
