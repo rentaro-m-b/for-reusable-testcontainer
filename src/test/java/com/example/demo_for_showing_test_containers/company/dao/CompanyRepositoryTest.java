@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @Testcontainers
 @DBRider
-@DBUnit(caseSensitiveTableNames = true)
+@DBUnit(caseSensitiveTableNames = true, cacheConnection = false)
 class CompanyRepositoryTest {
     @ServiceConnection
     @Container
@@ -60,7 +60,6 @@ class CompanyRepositoryTest {
     @Test
     @DataSet(
             value = "datasets/banks.yaml",
-            strategy = SeedStrategy.CLEAN_INSERT,
             cleanBefore = true
     )
     void listCompanies() throws Exception {
