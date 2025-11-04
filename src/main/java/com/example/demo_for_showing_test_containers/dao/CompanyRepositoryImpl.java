@@ -1,7 +1,7 @@
-package com.example.demo_for_showing_test_containers.bank.dao;
+package com.example.demo_for_showing_test_containers.dao;
 
-import com.example.demo_for_showing_test_containers.bank.domain.Company;
-import com.example.demo_for_showing_test_containers.bank.domain.CompanyRepository;
+import com.example.demo_for_showing_test_containers.domain.Company;
+import com.example.demo_for_showing_test_containers.domain.CompanyRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 

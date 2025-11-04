@@ -1,8 +1,8 @@
-package com.example.demo_for_showing_test_containers.bank.dao;
+package com.example.demo_for_showing_test_containers.dao;
 
-import com.example.demo_for_showing_test_containers.bank.domain.Currency;
-import com.example.demo_for_showing_test_containers.bank.domain.Money;
-import com.example.demo_for_showing_test_containers.bank.domain.Bank;
+import com.example.demo_for_showing_test_containers.domain.Currency;
+import com.example.demo_for_showing_test_containers.domain.Money;
+import com.example.demo_for_showing_test_containers.domain.Bank;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

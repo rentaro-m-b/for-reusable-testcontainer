@@ -1,10 +1,12 @@
-package com.example.demo_for_showing_test_containers.company.dao;
+package com.example.demo_for_showing_test_containers.dao;
 
-import com.example.demo_for_showing_test_containers.bank.domain.*;
+import com.example.demo_for_showing_test_containers.domain.Bank;
+import com.example.demo_for_showing_test_containers.domain.BankRepository;
+import com.example.demo_for_showing_test_containers.domain.Currency;
+import com.example.demo_for_showing_test_containers.domain.Money;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import com.github.database.rider.core.api.dataset.SeedStrategy;
 import com.github.database.rider.junit5.api.DBRider;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,6 +20,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DBRider
 @DBUnit(caseSensitiveTableNames = true, cacheConnection = false)
-class CompanyRepositoryTest {
+class BankRepositoryTest {
     @ServiceConnection
     @Container
     static MySQLContainer<?> container =
@@ -55,29 +58,29 @@ class CompanyRepositoryTest {
     }
 
     @Autowired
-    CompanyRepository target;
+    BankRepositoryImpl target;
 
     @Test
     @DataSet(
             value = "datasets/banks.yaml",
             cleanBefore = true
     )
-    void listCompanies() throws Exception {
+    void getBanks() throws Exception {
         // setup
 
         // execute
-        List<Company> actual = target.listCompanies();
+        List<Bank> actual = target.listBanks();
 
         // assert
-        List<Company> expected = List.of(
-                new Company(
+        List<Bank> expected = List.of(
+                new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        "Apple Inc.",
+                        new Money(new BigDecimal("100.00"), Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 ),
-                new Company(
+                new Bank(
                         "00000000-0000-0000-0000-000000000002",
-                        "Oracle",
+                        new Money(new BigDecimal("120.00"), Currency.YEN),
                         LocalDateTime.parse("2025-01-01T00:00:00")
                 )
         );
@@ -87,19 +90,18 @@ class CompanyRepositoryTest {
     @Test
     @DataSet(
             value = "datasets/banks.yaml",
-            strategy = SeedStrategy.CLEAN_INSERT,
             cleanBefore = true
     )
     @ExpectedDataSet(
             value = "expected/createBank.yaml"
     )
-    void createCompany() throws Exception {
+    void createBank() throws Exception {
         // setup
 
         // execute
-        target.createCompany(new Company(
+        target.createBank(new Bank(
                 "00000000-0000-0000-0000-000000000003",
-                "forest",
+                new Money(BigDecimal.valueOf(200), Currency.YEN),
                 LocalDateTime.parse("2025-01-01T00:00:00")
         ));
 
@@ -109,20 +111,19 @@ class CompanyRepositoryTest {
     @Test
     @DataSet(
             value = "datasets/banks.yaml",
-            strategy = SeedStrategy.CLEAN_INSERT,
             cleanBefore = true
     )
     @ExpectedDataSet(
             value = "expected/updateBank.yaml"
     )
-    void updateCompany() throws Exception {
+    void updateBank() throws Exception {
         // setup
 
         // execute
-        target.updateCompany(
-                new Company(
+        target.updateBank(
+                new Bank(
                         "00000000-0000-0000-0000-000000000001",
-                        "Lisa Inc.",
+                        new Money(BigDecimal.valueOf(300), Currency.DOLLAR),
                         LocalDateTime.parse("2025-01-01T00:00:01")
                 )
         );
@@ -133,17 +134,16 @@ class CompanyRepositoryTest {
     @Test
     @DataSet(
             value = "datasets/banks.yaml",
-            strategy = SeedStrategy.CLEAN_INSERT,
             cleanBefore = true
     )
     @ExpectedDataSet(
             value = "expected/deleteBank.yaml"
     )
-    void deleteCompany() throws Exception {
+    void deleteBank() throws Exception {
         // setup
 
         // execute
-        target.deleteCompany("00000000-0000-0000-0000-000000000001");
+        target.deleteBank("00000000-0000-0000-0000-000000000001");
 
         // assert
     }

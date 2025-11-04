@@ -1,4 +1,4 @@
-package com.example.demo_for_showing_test_containers.bank.dao;
+package com.example.demo_for_showing_test_containers.dao;
 
 import org.apache.ibatis.annotations.*;
 

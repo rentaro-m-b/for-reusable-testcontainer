@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS stocks (
-  id VARCHAR(36) NOT NULL PRIMARY KEY,
-  company_id VARCHAR(36) NOT NULL,
-  issued_shares INT NOT NULL,
-  created_at DATETIME NOT NULL
-);

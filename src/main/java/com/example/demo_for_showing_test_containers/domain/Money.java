@@ -1,4 +1,4 @@
-package com.example.demo_for_showing_test_containers.bank.domain;
+package com.example.demo_for_showing_test_containers.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
