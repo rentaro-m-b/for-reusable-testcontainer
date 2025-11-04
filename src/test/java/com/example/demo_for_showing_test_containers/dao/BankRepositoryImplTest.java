@@ -1,7 +1,6 @@
 package com.example.demo_for_showing_test_containers.dao;
 
 import com.example.demo_for_showing_test_containers.domain.Bank;
-import com.example.demo_for_showing_test_containers.domain.BankRepository;
 import com.example.demo_for_showing_test_containers.domain.Currency;
 import com.example.demo_for_showing_test_containers.domain.Money;
 import com.github.database.rider.core.api.configuration.DBUnit;
@@ -30,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DBRider
 @DBUnit(caseSensitiveTableNames = true, cacheConnection = false)
-class BankRepositoryTest {
+class BankRepositoryImplTest {
     @ServiceConnection
     @Container
     static MySQLContainer<?> container =

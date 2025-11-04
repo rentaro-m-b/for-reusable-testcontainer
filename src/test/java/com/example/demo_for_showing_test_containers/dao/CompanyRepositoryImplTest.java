@@ -1,7 +1,6 @@
 package com.example.demo_for_showing_test_containers.dao;
 
 import com.example.demo_for_showing_test_containers.domain.Company;
-import com.example.demo_for_showing_test_containers.domain.CompanyRepository;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
@@ -28,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @DBRider
 @DBUnit(caseSensitiveTableNames = true, cacheConnection = false)
-class CompanyRepositoryTest {
+class CompanyRepositoryImplTest {
     @ServiceConnection
     @Container
     static MySQLContainer<?> container =
