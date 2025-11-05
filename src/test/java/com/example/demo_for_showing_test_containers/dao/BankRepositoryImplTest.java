@@ -18,6 +18,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.utility.TestcontainersConfiguration;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,17 +32,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DBUnit(caseSensitiveTableNames = true, cacheConnection = false)
 class BankRepositoryImplTest {
     @ServiceConnection
-    @Container
     static MySQLContainer<?> container =
             new MySQLContainer<>(
                 DockerImageName.parse("mysql:8.4"))
                 .withEnv("TZ", "UTC")
-                .withReuse(false)
+                .withReuse(true)
                 .waitingFor(Wait.forLogMessage(".*ready for connections. Version:.*\\n", 1)
             );
 
     @BeforeAll
     static void setUpAll() {
+        container.start();
+
         var flyway =
                 Flyway
                         .configure()
